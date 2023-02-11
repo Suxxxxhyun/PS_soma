@@ -17,9 +17,9 @@
 
 개인폴더\언어\문제폴더\소스파일 형식으로 업로드해주시면 됩니다.
 
-
 ex)
 Chobo\java\bj\230212_1439_뒤집기\solution.java
+
 
 Chobo\java\pg\230212_1439_뒤집기\solution.java
 
