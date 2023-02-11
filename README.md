@@ -53,5 +53,4 @@ Chobo\java\pg\230212_1439_뒤집기\solution.java
  
  -그리디
  
- 
  -첫 풀이
