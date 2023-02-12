@@ -20,11 +20,11 @@
 
 
 ex)
-Chobo\java\bj\230212_1439_뒤집기\solution.java
+GongCho\java\bj\230212_1439_뒤집기\solution.java
 
 
 ex)
-Chobo\java\pg\230212_1439_뒤집기\solution.java
+GongCho\java\pg\230212_1439_뒤집기\solution.java
 
 ### 2-1. 문제 폴더 네이밍 규칙
  날짜_문제번호_문제명
