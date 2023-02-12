@@ -1,6 +1,6 @@
 package baekjun.src.baekjun.BFSDFS;
 
-//테스트용
+//테스트용//
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
