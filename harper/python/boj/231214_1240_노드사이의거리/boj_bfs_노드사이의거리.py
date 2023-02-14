@@ -13,11 +13,11 @@ def bfs(start, end):
   visited = [-1] * (n+1)
   visited[start] = 0
   while queue:
-    print(visited)
     x = queue.popleft()
     if x == end: # 탈출 조건 파악 못함
       break
     for next_node, distance in tree[x]:
+      if visited[next_node] > -1: continue
       visited[next_node] = visited[x] + distance
       queue.append(next_node)
   return visited[end]
