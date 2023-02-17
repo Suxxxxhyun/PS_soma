@@ -61,6 +61,7 @@ public class Main14889{
     }
 
     static void calculator(){
+        //최대치 : n=10일때, 아래 코드는 10*10 = 100까지의 시간복잡도를 가지게됨.
         int start_grade = 0, link_grade = 0;
         for(int i=1; i<=n/2; i++){
             for(int j=1; j<=n/2; j++){
