@@ -41,7 +41,7 @@ public class Main16926 {
                 }
 
                 for(int k=m-2-j; k>=j; k--) { //13 14 15
-                    a[n-1-j][k+1] = a[m-1-j][k];
+                    a[n-1-j][k+1] = a[n-1-j][k];
                 }
 
                 for(int k=n-2-j; k>=j; k--) {
