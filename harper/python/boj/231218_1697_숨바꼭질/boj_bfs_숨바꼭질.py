@@ -12,10 +12,10 @@ queue = deque([n])
 
 while queue:
   start = queue.popleft()
-  if start == k:
+  if start == k: 
     print(dist[start])
     break
   for next in [start-1, start+1, start*2]: #배열 만들지 않고 이렇게 정의 가능
-    if 0<=next<MAX and not dist[next]: # if not은 false 말고 정수로 했을때 0을 의미 
+    if 0<=next<MAX and not dist[next]: # if not은 false 말고 정수로 했을때 0을 의미
       dist[next] = dist[start] + 1
       queue.append(next)
