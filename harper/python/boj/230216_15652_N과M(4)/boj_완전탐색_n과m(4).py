@@ -1,12 +1,14 @@
-n, m = map(int, input().split())
-answer = []
+N, M = map(int, input().split())
+num = []
+
 def dfs(start):
-  if len(answer) == m:
-    print(' '.join(map(str, answer)))
+  if len(num) == M:
+    print(' '.join(map(str, num)))
     return
 
-  for i in range(start, n+1):
-    answer.append(i)
+  for i in range(start, N+1):
+    num.append(i)
     dfs(i)
-    answer.pop()
+    num.pop()
+
 dfs(1)

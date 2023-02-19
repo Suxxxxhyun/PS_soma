@@ -1,18 +1,15 @@
-n, m = map(int, input().split())
-answer = [0] * (m)
-check = [False] * (n+1)
-def dfs(num):
-  if num == m:
-    print(*answer)
+N, M = map(int, input().split())
+num = []
+def dfs():
+  if len(num) == M:
+    print(' '.join(map(str, num)))
     return
 
-  for i in range(1, n+1):
-    if check[i] == False:
-      check[i] = True
-      answer[num] = i
-      dfs(num+1)
-      check[i] = False
+  for i in range(1, N+1):
+    if i in num:
+      continue
+    num.append(i)
+    dfs()
+    num.pop()
 
-combination(0)
-
-
+dfs()
