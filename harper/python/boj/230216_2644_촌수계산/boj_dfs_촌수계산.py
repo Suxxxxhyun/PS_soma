@@ -1,30 +1,25 @@
 n = int(input())
-a, b = map(int, input().split())
-m = int(input())
-
-family = [[] for _ in range(n+1)]
+family = [[] * (n+1) for _ in range(n+1)]
+x, y = map(int, input().split())
+m = int(int(input()))
 visited = [False] * (n+1)
-
 for _ in range(m):
-  x, y = map(int, input().split())
-  family[x].append(y)
-  family[y].append(x)
+  a, b = map(int, input().split())
+  family[a].append(b)
+  family[b].append(a)
 
 result = -1
-
-def dfs(idx, num):
+def dfs(target, cnt):
   global result
-
-  if idx == b:
-    result = num
+  if target == y:
+    result = cnt
     return
 
-  num += 1 #촌수계산
-  visited[idx] = True
+  visited[target] = True
 
-  for i in family[idx]:
-    if not visited[i]:
-      dfs(i, num)
+  for child in family[target]:
+    if not visited[child]:
+      dfs(child, cnt+1)
 
-dfs(a, 0)
+dfs(x, 0)
 print(result)
