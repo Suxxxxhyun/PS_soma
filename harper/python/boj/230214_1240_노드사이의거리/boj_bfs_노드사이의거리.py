@@ -1,28 +1,28 @@
 from collections import deque
 n, m = map(int, input().split())
-tree = [[] for _ in range(n+1)]
+tree = [[] * (n+1) for _ in range(n+1)]
 
-for _ in range(n-1):
-  a, b, distance = map(int, input().split())
-  tree[a].append((b, distance))
-  tree[b].append((a, distance))
 
-def bfs(start, end):
-  queue = deque()
-  queue.append(start)
-  visited = [-1] * (n+1)
-  visited[start] = 0
-  while queue:
-    x = queue.popleft()
-    if x == end: # 탈출 조건 파악 못함
-      break
-    for next_node, distance in tree[x]:
-      if visited[next_node] > -1: continue
-      visited[next_node] = visited[x] + distance
-      queue.append(next_node)
-  return visited[end]
+for i in range(n-1):
+  a, b, edge = map(int, input().split())
+  tree[a].append((b, edge))
+  tree[b].append((a, edge))
 
 for i in range(m):
-  a, b = map(int, input().split())
-  print(bfs(a, b))
+  start, end = map(int, input().split())
+  queue = deque()
+  queue.append(start)
+  distance = [-1] * (n+1)
+  visited = [False]  * (n+1)
+  distance[start] = 0
+  visited[start] = True
 
+  while queue:
+    node = queue.pop()
+    visited[node] = True
+    if node == end:
+      print(distance[node])
+    for next, weight in tree[node]:
+      if distance[node] != -1 and not visited[next]:
+        distance[next] = distance[node] + weight
+        queue.append(next)
