@@ -4,30 +4,29 @@ n, k = map(int, input().split())
 lab = [[0] * n for _ in range(n)]
 for i in range(n):
   lab[i] = list(map(int, input().split()))
-s, a, b = map(int, input().split())
+s, x, y = map(int, input().split())
 
-virus = []
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+list = []
 for i in range(n):
   for j in range(n):
     if lab[i][j] != 0:
-      virus.append((lab[i][j], i, j, 0))
+      list.append((lab[i][j], i, j, 0))
 
-virus.sort()
-queue = deque(virus)
-
-second = 0
-dx = [0, 0, -1, 1]
-dy = [-1, 1, 0, 0]
+list.sort()
+queue = deque(list)
 
 while queue:
-  virus, x, y, time = queue.popleft()
-  if time == s:
+  virus, a, b, second = queue.popleft()
+  if s == second:
     break
   for i in range(4):
-    nx = x + dx[i]
-    ny = y + dy[i]
+    nx = a + dx[i]
+    ny = b + dy[i]
     if 0<=nx<n and 0<=ny<n and lab[nx][ny] == 0:
+      # lab[nx][ny] = lab[a][b]
       lab[nx][ny] = virus
-      queue.append((virus, nx, ny, time+1))
+      queue.append((lab[nx][ny], nx, ny, second + 1))
 
-print(lab[a-1][b-1])
+print(lab[x-1][y-1])
