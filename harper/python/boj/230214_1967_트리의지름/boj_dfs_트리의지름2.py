@@ -1,36 +1,36 @@
-'''
-개선버전
-가장 긴 노드를 찾고
-해당 노드로 탐색했을 때 간선의 길이 중 젤 긴 것 반환
-'''
-
 import sys
 sys.setrecursionlimit(10**9)
 n = int(input())
-tree = [[] for _ in range(n+1)]
-def dfs(x, distance):
-  for i, d in tree[x]:
-    if distance[i] == 0:
-      distance[i] = distance[x] + d
-      dfs(i, distance)
+tree = [[] * (n+1) for _ in range(n+1)]
 
-for _ in range(n-1):
-  a, b, distance = map(int, input().split())
-  tree[a].append((b, distance))
-  tree[b].append((a, distance))
+for i in range(n-1):
+  a, b, weight = map(int, input().split())
+  tree[a].append((b, weight))
+  tree[b].append((a, weight))
 
-result = 0
-distance = [0] * (n+1)
-dfs(1, distance)
-index = 0
+def dfs(start): #distance에 표시하는게 역할이야
+  visited[start] = True
+  for next, weight in tree[start]:
+    if not visited[next] and distance[start] != -1:
+      distance[next] = distance[start] + weight
+      dfs(next)
 
-for i in range(n+1):
-  if result < distance[i]:
-    result = distance[i]
-    index = i
 
-distance = [0] * (n+1)
+visited = [False] * (n+1)
+distance = [-1] * (n+1)
 distance[1] = 0
-dfs(index, distance)
-distance[index] = 0
+dfs(1)
+max_value = 0
+max_index = 0
+
+for i in range(1, n+1):
+  if max_value < distance[i]:
+    max_value = distance[i]
+    max_index = i
+
+distance = [-1] * (n+1)
+visited = [False] * (n+1)
+distance[max_index]  = 0
+dfs(max_index)
+
 print(max(distance))
