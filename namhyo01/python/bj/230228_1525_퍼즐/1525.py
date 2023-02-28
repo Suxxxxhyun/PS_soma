@@ -28,7 +28,6 @@ def check(m):
 
 def bfs(x,y,maps):
     map = deepcopy(maps)
-    ans = 0
     queue = deque([])
     queue.append([x,y,map,0])
     while queue:

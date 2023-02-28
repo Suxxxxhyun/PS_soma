@@ -15,6 +15,21 @@ leftdp = [-1 for _ in range(n+1)]
 rightdp = [-1 for _ in range(n+1)]
 inf = 2000000001
 
+
+# for i in range(n):
+#     start_point, height = dominos[i]
+#     left_end_point = start_point - height
+#     right_end_point = start_point + height
+#     for j in range(i, -1, -1):
+#         if left_end_point <= dominos[j][0]:
+#             left_end_point = min(left_end_point, dominos[j][0] - dominos[j][1])
+#             leftdp[i] = min(leftdp[i], j)
+#     for j in range(i + 1, n):
+#         if right_end_point >= dominos[j][0]:
+#             right_end_point = max(right_end_point, dominos[j][0] + dominos[j][1])
+#             rightdp[i] = max(rightdp[i], j)
+
+
 def left(cur):
 
     if leftdp[cur] != -1:
@@ -55,14 +70,57 @@ def solve(start,end):
     if rightdp[start]>=end or leftdp[end]<=start:
         dp[start][end] = 1
         return dp[start][end]
+    
     dp[start][end] = float('inf')
     for i in range(start,end+1):
         dp[start][end] = min(dp[start][end], solve(start,leftdp[i]-1)+solve(leftdp[i],rightdp[i])+solve(rightdp[i]+1,end))
     return dp[start][end]
 
-print(leftdp)
-print(rightdp)
-print(solve(0,n-1))
-    
+
+def solve2(n):
+    dp2 = [ float('inf') for _ in range(n+1) ]
+    dp2[0] = 1
+    for i in range(1,n):
+        if leftdp[i] <= 0:
+            dp2[i] = min(dp2[i],1)
+        else:
+            dp2[i] = min(dp2[i],dp2[leftdp[i]-1]+1)
+        for j in range(i):
+            if rightdp[j] >= i:
+                if j==0:
+                    dp2[i] = min(dp2[i],1)
+                else:
+                    dp2[i] = min(dp2[i],dp2[j-1]+1)
+    print(dp2[n-1])
+
+
+def solve3(n):
+        # dp[i] -> 0 ~ i까지 넘어뜨리는 데 필요한 최소 횟수
+    dp = [float('inf') for i in range(n)]
+    # 0~0번째 도미노를 넘어뜨리는 데 필요한 최소 개수는 1개 
+    dp[0] = 1
+
+    for i in range(n):
+        if left[i] - 1 < 0:
+            dp[i] = min(dp[i], 1)
+        else:
+            # i번째 도미노를 왼쪽으로 무너뜨렸을 때 left[i]번째까지 한방에 무너지므로, 
+            # 0 ~ i번째 도미노까지 무너뜨리는 데 필요한 최소 횟수는 0 ~ left[i] - 1까지 넘어뜨리는 데 필요한 최소 횟수 + 1
+            dp[i] = min(dp[i], dp[left[i] - 1] + 1)
+
+        # 왼쪽으로 넘어뜨렸을 때의 최솟값을 전부 고려했다면 이번에는 오른쪽으로 넘어뜨렸을 때의 상황을 고려해야함
+        # 만약 i보다 왼쪽에 있는 j번째 도미노를 오른쪽으로 넘어뜨렸을 때, i번째 도미노가 같이 넘어진다면, dp[i] = min(dp[i], dp[j - 1] + 1)로 볼 수 있음 
+        # 이는 앞서 i보다 왼쪽에 있는 dp들이 모두 제대로 업데이트 됐기 때문에 가능한 검증임
+        for j in range(i):
+            if right[j] >= i:
+                if j == 0:
+                    dp[i] = min(dp[i], 1)
+                else:
+                    dp[i] = min(dp[i], dp[j - 1] + 1) 
+                    
+    print(dp[n - 1])
+
+# print(solve(0,n-1))
+solve2(n)
     
     
