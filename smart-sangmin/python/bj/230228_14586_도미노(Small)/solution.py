@@ -1,31 +1,23 @@
 def hitleft(i):
-    x = dom[i][0] - dom[i][1]
+    x = domino[i][0] - domino[i][1]
     for j in range(i-1, -1, -1):
-        if dom[j][0] < x:
+        if domino[j][0] < x:
             return j+1
-        x = min(x, dom[j][0] - dom[j][1])
+        x = min(x, domino[j][0] - domino[j][1])
     return 0
 
 
 def hitright(i):
-    x = dom[i][0] + dom[i][1]
+    x = domino[i][0] + domino[i][1]
     for j in range(i+1, n):
-        if dom[j][0] > x:
+        if domino[j][0] > x:
             return j-1
-        x = max(x, dom[j][0] + dom[j][1])
+        x = max(x, domino[j][0] + domino[j][1])
     return n-1
 
 
 n = int(input())
-"""
-5
-1 2
-3 1
-6 2
-7 1
-9 2
-"""
-dom = sorted(tuple(map(int, input().split())) for i in range(n))
+domino = sorted(tuple(map(int, input().split())) for i in range(n))
 L = [hitleft(i) for i in range(n)]
 R = [hitright(i) for i in range(n)]
 
@@ -44,4 +36,4 @@ for i in range(n):
         if R[j] >= i:
             # 1은 j를 넘긴거(R[j]) j의 오른쪽은 다 넘어갔으니까 j이전꺼 더 해줘야 함(dp[j-1])
             dp[i] = min(dp[i], 1 + (dp[j-1] if j-1 >= 0 else 0))
-print(dp[0])
+print(dp[n-1])
