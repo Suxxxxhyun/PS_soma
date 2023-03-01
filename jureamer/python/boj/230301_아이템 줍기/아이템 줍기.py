@@ -47,6 +47,6 @@ def solution(rectangle, characterX, characterY, itemX, itemY):
         
     return 0
 
-신규_프로그래머스_아이템줍기
-- BFS
-- 이런 도형 길찾기 문제는 2배로 처리하자..!
+# 신규_프로그래머스_아이템줍기
+# - BFS
+# - 이런 도형 길찾기 문제는 2배로 처리하자..!
