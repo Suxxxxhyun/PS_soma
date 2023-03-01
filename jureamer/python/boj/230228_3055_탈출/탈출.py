@@ -98,3 +98,5 @@ else:
     print("KAKTUS")
     
 
+    신규_백준_3055_탈출
+    - BFS
