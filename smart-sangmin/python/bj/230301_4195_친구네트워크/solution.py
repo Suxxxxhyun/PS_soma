@@ -13,7 +13,9 @@ def find(n):
 def union(a, b):
     a = find(a)
     b = find(b)
-    if a > b:
+    if a == b:
+        return a
+    elif a > b:
         friends[a] = b
         numbers[b] += numbers[a]
         return b
